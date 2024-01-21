@@ -1,7 +1,52 @@
-<shared-navbar></shared-navbar>
-<div class="contenido-principal">
-    <p >home works!</p>
-    dasdsa
-    adsad
-    asda
-</div>
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="push" [ngStyle]="{width: '250px',height:'auto'}">
+        <mat-toolbar color="warn">
+
+            <span class="spacer">menu</span>
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </mat-toolbar>
+        <mat-nav-list>
+            <mat-list-item *ngFor="let item of sidebarItemsDesplegables" [ngStyle]="{height:'100%'}">
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <mat-icon>{{item.icon}}</mat-icon>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{item.label}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <div class="contenido-menu" *ngFor="let subitem of item.categorias">
+                            <mat-action-row [routerLink]="subitem.url">
+                                <div class="logo-menu"><mat-icon>{{subitem.icon}}</mat-icon></div>
+                                <div class="texto-menu">{{subitem.label}}</div>
+                            </mat-action-row>
+                        </div>
+
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+
+
+
+            </mat-list-item>
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+    <mat-toolbar color="primary">
+        <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      
+
+    </mat-toolbar>
+    <div class="container">
+        <router-outlet> </router-outlet>
+    </div>
+</mat-sidenav-container>
